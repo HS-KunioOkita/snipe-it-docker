@@ -1,0 +1,32 @@
+version: '3.5'
+
+services:
+  snipe-it_db:
+    image: mysql:5.6
+    volumes:
+      - db_data: /var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'snipeit'
+      MYSQL_DATABASE: 'snipeit'
+      MYSQL_USER: 'snipeit'
+      MYSQL_PASSWORD: 'snipeit'
+  snipe-it:
+    image: snipe/snipe-it
+    restart: always
+    ports:
+      - "9000:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: 'snipeit'
+      MYSQL_DATABASE: 'snipeit'
+      MYSQL_USER: 'snipeit'
+      MYSQL_PASSWORD: 'snipeit'
+      APP_ENV: production
+      APP_DEBUG: false
+      APP_KEY: <<Fill in Later!>>
+      APP_URL: http://127.0.0.1:9000
+      APP_TIMEZONE: Asia/Tokyo
+      APP_LOCALE: ja
+      PHP_UPLOAD_LIMIT: 100
+   
+  
